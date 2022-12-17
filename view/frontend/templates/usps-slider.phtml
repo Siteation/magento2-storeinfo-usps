@@ -13,6 +13,7 @@ use Siteation\StoreUsps\ViewModel\StoreUsps;
 $storeUsps = $viewModels->require(StoreUsps::class);
 $usps = $storeUsps->getUsps();
 $uspsLength = count($usps);
+$uspsSafeHtml = ['a', 'strong', 'em', 'br'];
 
 if ($uspsLength === 0) {
     return '';
@@ -27,9 +28,11 @@ if ($uspsLength === 0) {
     class="bg-container py-2 text-sm"
 >
     <div class="container">
-        <ul id="header-usps" class="usps">
+        <ul id="header-usps" class="usps -slider">
             <?php foreach ($usps as $usp): ?>
-                <li><?= $escaper->escapeHtml($usp, ['a', 'strong', 'em', 'br']); ?></li>
+                <li
+                    class="<?= ($index === 0 ? 'is-active' : '') ?>"
+                ><?= $escaper->escapeHtml($usp, $uspsSafeHtml); ?></li>
             <?php endforeach; ?>
         </ul>
     </div>
@@ -58,7 +61,7 @@ if ($uspsLength === 0) {
             };
 
             return {
-                isMobile: false,
+                isMobile: true,
                 checkIsMobileResolution() {
                     this.isMobile = window.matchMedia(`(max-width: ${uspsSliderMq})`).matches;
                     (this.isMobile ? this.startSlider() : this.stopSlider());
@@ -70,7 +73,6 @@ if ($uspsLength === 0) {
                 },
                 startSlider() {
                     if (!uspsWrapper) return;
-                    if (uspsWrapper.classList.contains(uspsSliderClass)) return;
                     uspsWrapper.classList.add(uspsSliderClass);
                     uspSlider();
                 }
