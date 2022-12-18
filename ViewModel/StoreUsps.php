@@ -3,8 +3,8 @@
 namespace Siteation\StoreUsps\ViewModel;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Store\Model\ScopeInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
+use Magento\Store\Model\ScopeInterface;
 
 class StoreUsps implements ArgumentInterface
 {

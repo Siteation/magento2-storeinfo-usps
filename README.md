@@ -1,4 +1,4 @@
-# Siteation - Magento 2 module Store Usps
+# Siteation - Magento 2 Store Usps
 
 [![Packagist Version](https://img.shields.io/packagist/v/siteation/magento2-storeusps?style=for-the-badge)](https://packagist.org/packages/siteation/magento2-storeusps)
 ![Supported Magento Versions](https://img.shields.io/badge/magento-%202.3_|_2.4-brightgreen.svg?logo=magento&longCache=true&style=for-the-badge)
