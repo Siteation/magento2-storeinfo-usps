@@ -29,7 +29,7 @@ if ($uspsLength === 0) {
 >
     <div class="container">
         <ul id="header-usps" class="usps -slider">
-            <?php foreach ($usps as $usp): ?>
+            <?php foreach ($usps as $index => $usp): ?>
                 <li
                     class="<?= ($index === 0 ? 'is-active' : '') ?>"
                 ><?= $escaper->escapeHtml($usp, $uspsSafeHtml); ?></li>
