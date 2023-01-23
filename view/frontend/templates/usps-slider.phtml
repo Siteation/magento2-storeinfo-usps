@@ -8,75 +8,30 @@ use Siteation\StoreUsps\ViewModel\StoreUsps;
 /** @var ViewModelRegistry $viewModels */
 /** @var Template $block */
 /** @var Escaper $escaper */
+
 /** @var StoreUsps $storeUsps */
-
 $storeUsps = $viewModels->require(StoreUsps::class);
-$usps = $storeUsps->getUsps();
-$uspsLength = count($usps);
-$uspsSafeHtml = ['a', 'strong', 'em', 'br'];
 
-if ($uspsLength === 0) {
+$usps = $storeUsps->getUsps();
+
+if (count($usps) === 0) {
     return '';
 }
+
 ?>
 
-<div
-    x-data="initUspsSlider()"
-    x-init="checkIsMobileResolution();"
-    @resize.window.debounce="checkIsMobileResolution()"
-    @visibilitychange.window.debounce="checkIsMobileResolution()"
-    class="bg-container py-2 text-sm"
->
+<div class="bg-container-lighter mb-2 py-4">
     <div class="container">
-        <ul id="header-usps" class="usps -slider">
-            <?php foreach ($usps as $index => $usp): ?>
-                <li
-                    class="<?= ($index === 0 ? 'is-active' : '') ?>"
-                ><?= $escaper->escapeHtml($usp, $uspsSafeHtml); ?></li>
-            <?php endforeach; ?>
-        </ul>
+        <div id="header-usps" class="usps-marquee lg:not-usps-marquee flex overflow-hidden select-none">
+            <div class="usps-group min-w-full shrink-0 flex justify-around items-center lg:justify-between lg:shrink-1">
+                <?= $block->getChildHtml('') ?>
+            </div>
+            <div
+                class="usps-group min-w-full shrink-0 flex justify-around items-center lg:hidden"
+                aria-hidden="true"
+            >
+                <?= $block->getChildHtml('') ?>
+            </div>
+        </div>
     </div>
-
-    <script>
-        function initUspsSlider() {
-            const uspsWrapper = document.getElementById('header-usps');
-            const usps = uspsWrapper && uspsWrapper.querySelectorAll('li');
-            const uspsSliderSpeed = 2000;
-            const uspsSliderMq = "1023px";
-            const uspsSliderClass = "-slider";
-            const uspsSliderItemActiveClass = "is-active";
-            let activeUsp = 0;
-            let loopUsps;
-
-            const uspSlider = () => {
-                if (!usps) return;
-                usps.forEach((usp, index) => {
-                    usp.classList.toggle(uspsSliderItemActiveClass, index === activeUsp);
-                });
-
-                loopUsps = setTimeout(() => {
-                    uspSlider();
-                    (activeUsp >= (usps.length - 1) ? activeUsp = 0 : activeUsp++);
-                }, uspsSliderSpeed);
-            };
-
-            return {
-                isMobile: true,
-                checkIsMobileResolution() {
-                    this.isMobile = window.matchMedia(`(max-width: ${uspsSliderMq})`).matches;
-                    (this.isMobile ? this.startSlider() : this.stopSlider());
-                },
-                stopSlider() {
-                    if (!uspsWrapper) return;
-                    uspsWrapper.classList.remove(uspsSliderClass);
-                    clearTimeout(loopUsps);
-                },
-                startSlider() {
-                    if (!uspsWrapper) return;
-                    uspsWrapper.classList.add(uspsSliderClass);
-                    uspSlider();
-                }
-            }
-        }
-    </script>
 </div>

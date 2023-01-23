@@ -6,10 +6,15 @@
     <body>
         <referenceContainer name="page.wrapper">
             <block
-                name="storeusps"
+                name="storeusps.slider"
                 template="Siteation_StoreUsps::usps-slider.phtml"
                 before="header.container"
-            />
+            >
+                <block
+                    name="storeusps"
+                    template="Siteation_StoreUsps::usps.phtml"
+                />
+            </block>
         </referenceContainer>
     </body>
 </page>
