@@ -22,8 +22,8 @@ if (count($usps) === 0) {
 
 <div class="bg-container-lighter mb-2 py-4">
     <div class="container">
-        <div id="header-usps" class="usps-marquee lg:not-usps-marquee flex overflow-hidden select-none">
-            <div class="usps-group min-w-full shrink-0 flex justify-around items-center lg:justify-between lg:shrink-1">
+        <div id="header-usps" class="usps-marquee lg:not-usps-marquee flex lg:block overflow-hidden select-none text-sm">
+            <div class="usps-group min-w-full shrink-0 flex justify-around items-center lg:justify-start lg:flex-wrap lg:shrink-1 lg:gap-x-4 lg:gap-y-2">
                 <?= $block->getChildHtml('') ?>
             </div>
             <div

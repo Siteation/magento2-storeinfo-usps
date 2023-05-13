@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 
 use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\HeroiconsOutline;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\Escaper;
 use Siteation\StoreUsps\ViewModel\StoreUsps;
@@ -8,6 +9,9 @@ use Siteation\StoreUsps\ViewModel\StoreUsps;
 /** @var ViewModelRegistry $viewModels */
 /** @var Template $block */
 /** @var Escaper $escaper */
+
+/** @var HeroiconsOutline $heroicons */
+$heroicons = $viewModels->require(HeroiconsOutline::class);
 
 /** @var StoreUsps $storeUsps */
 $storeUsps = $viewModels->require(StoreUsps::class);
@@ -20,5 +24,8 @@ if (count($usps) === 0) {
 ?>
 
 <?php foreach ($usps as $index => $usp): ?>
-    <div class="shrink-0 lg:shrink-1"><?= $escaper->escapeHtml($usp, ['a', 'strong', 'em', 'br']); ?></div>
+    <div class="flex shrink-0 lg:shrink-1">
+        <?= $heroicons->checkCircleHtml('shrink-0 mr-2 text-primary', 20, 20); ?>
+        <span><?= $escaper->escapeHtml($usp, ['a', 'strong', 'em', 'br']); ?></span>
+    </div>
 <?php endforeach; ?>
