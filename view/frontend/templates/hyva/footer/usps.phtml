@@ -1,0 +1,93 @@
+<?php declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\HeroiconsOutline;
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\Escaper;
+use Siteation\StoreInfoUsps\ViewModel\StoreInfoUsps;
+
+/** @var ViewModelRegistry $viewModels */
+/** @var Template $block */
+/** @var Escaper $escaper */
+
+/** @var HeroiconsOutline $heroIcons */
+$heroIcons = $viewModels->require(HeroiconsOutline::class);
+
+/** @var StoreInfoUsps $storeUsps */
+$storeUsps = $viewModels->require(StoreInfoUsps::class);
+
+$usps = $storeUsps->getFooterUsps();
+
+if (count($usps) === 0) {
+    return '';
+}
+
+?>
+
+<section
+    class="border-t border-container-darker bg-container-darker py-4"
+    aria-label="<?= $escaper->escapeHtml(__('Our Unique Selling Points')) ?>"
+>
+    <div class="top-container container">
+        <ul
+            class="usps grid gap-x-8 gap-y-2 place-content-center lg:flex lg:flex-wrap lg:justify-start"
+            x-data="footerUspCarousel()"
+            @resize.window.debounce="checkIsMobileResolution()"
+            @visibilitychange.window.debounce="checkIsMobileResolution()"
+        >
+            <?php
+                $uspsStartIndex = 1;
+                foreach ($usps as $usp):
+            ?>
+                <li
+                    class="inline-flex gap-2 justify-center items-center row-start-1 col-start-1 lg:shrink-1 lg:justify-start
+                        opacity-0 lg:opacity-100 transition-opacity"
+                    :class="{ 'opacity-0': currentItem !== <?= /** @noEscape */ $uspsStartIndex ?> }"
+                >
+                    <?= $heroIcons->checkHtml('text-green-500', 20, 20, ['aria-hidden' => 'true']) ?>
+                    <?= $escaper->escapeHtml($usp, ['a', 'strong', 'em', 'br']); ?>
+                </li>
+            <?php
+                $uspsStartIndex++;
+                endforeach;
+            ?>
+        </ul>
+    </div>
+
+    <script>
+        function footerUspCarousel() {
+            return {
+                uspsEvent: null,
+                currentItem: 2,
+                itemCount: 0,
+                speed: 3000,
+                isMobile: false,
+                init() {
+                    this.itemCount = this.$root.children.length;
+                    this.checkIsMobileResolution();
+                },
+                checkIsMobileResolution() {
+                    this.isMobile = getComputedStyle(this.$root).display !== 'flex';
+
+                    if (!this.isMobile) {
+                        this.stop();
+                    }
+
+                    if (this.isMobile && this.uspsEvent === null) {
+                        this.start();
+                    }
+                },
+                cycle() {
+                    this.currentItem = this.currentItem >= this.itemCount ? 1 : this.currentItem + 1;
+                },
+                start() {
+                    this.uspsEvent = setInterval(() => this.cycle(), this.speed);
+                },
+                stop() {
+                    clearInterval(this.uspsEvent);
+                    this.uspsEvent = null;
+                },
+            }
+        }
+    </script>
+</section>

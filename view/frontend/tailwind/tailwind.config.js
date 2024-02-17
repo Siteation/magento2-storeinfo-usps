@@ -1,3 +1,3 @@
 module.exports = {
-    content: ["../templates/**/*.phtml"],
+    content: ["../templates/hyva/**/*.phtml"],
 };

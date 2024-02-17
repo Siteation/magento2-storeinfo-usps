@@ -4,16 +4,28 @@
     xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
 >
     <body>
-        <referenceContainer name="page.wrapper">
+        <referenceContainer name="header.panel">
             <block
-                name="storeusps.slider"
-                template="Siteation_StoreUsps::usps-slider.phtml"
-                before="header.container"
+                name="storeinfo.usps.header"
+                template="Siteation_StoreInfoUsps::luma/header/usps.phtml"
+                before="top.links"
             >
-                <block
-                    name="storeusps"
-                    template="Siteation_StoreUsps::usps.phtml"
-                />
+                <arguments>
+                    <argument name="viewModelStoreInfo"
+                        xsi:type="object">Siteation\StoreInfoUsps\ViewModel\StoreInfoUsps</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+
+        <referenceContainer name="footer">
+            <block
+                name="storeinfo.usps.footer"
+                template="Siteation_StoreInfoUsps::luma/footer/usps.phtml"
+            >
+                <arguments>
+                    <argument name="viewModelStoreInfo"
+                        xsi:type="object">Siteation\StoreInfoUsps\ViewModel\StoreInfoUsps</argument>
+                </arguments>
             </block>
         </referenceContainer>
     </body>

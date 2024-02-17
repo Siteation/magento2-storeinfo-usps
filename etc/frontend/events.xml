@@ -4,6 +4,9 @@
     xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd"
 >
     <event name="hyva_config_generate_before">
-        <observer name="Siteation_StoreUsps" instance="Siteation\StoreUsps\Observer\RegisterModuleForHyvaConfig"/>
+        <observer
+            name="Siteation_StoreInfoUsps_Register_Hyva_Config"
+            instance="Siteation\StoreInfoUsps\Observer\RegisterModuleForHyvaConfig"
+        />
     </event>
 </config>

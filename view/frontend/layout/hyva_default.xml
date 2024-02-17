@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<page
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+>
+    <body>
+        <referenceContainer name="page.wrapper">
+            <block
+                name="storeinfo.usps.header"
+                template="Siteation_StoreInfoUsps::hyva/header/usps.phtml"
+                before="header.container"
+            />
+        </referenceContainer>
+
+        <referenceContainer name="footer">
+            <block
+                name="storeinfo.usps.footer"
+                template="Siteation_StoreInfoUsps::hyva/footer/usps.phtml"
+                before="footer-content"
+            />
+        </referenceContainer>
+    </body>
+</page>

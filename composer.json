@@ -5,7 +5,12 @@
   "type": "magento2-module",
   "description": "Get your store usps with ease",
   "readme": "README.md",
-  "keywords": ["magento2", "magento2-module", "magento2-hyva", "usps"],
+  "keywords": [
+    "magento2",
+    "magento2-module",
+    "magento2-hyva",
+    "usps"
+  ],
   "authors": [
     {
       "name": "Siteation",
@@ -20,9 +25,11 @@
     "hyva-themes/magento2-theme-module": "^1.1"
   },
   "autoload": {
-    "files": ["registration.php"],
+    "files": [
+      "registration.php"
+    ],
     "psr-4": {
-      "Siteation\\StoreUsps\\": ""
+      "Siteation\\StoreInfoUsps\\": ""
     }
   }
 }

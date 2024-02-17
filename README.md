@@ -1,9 +1,9 @@
 # Siteation - Magento 2 Store Usps
 
-[![Packagist Version](https://img.shields.io/packagist/v/siteation/magento2-storeusps?style=for-the-badge)](https://packagist.org/packages/siteation/magento2-storeusps)
+[![Packagist Version](https://img.shields.io/packagist/v/siteation/magento2-storeinfo-usps?style=for-the-badge)](https://packagist.org/packages/siteation/magento2-storeinfo-usps)
 ![Supported Magento Versions](https://img.shields.io/badge/magento-%202.3_|_2.4-brightgreen.svg?logo=magento&longCache=true&style=for-the-badge)
 [![Hyvä Themes Supported](https://img.shields.io/badge/Hyva_Themes-Supported-3df0af.svg?longCache=true&style=for-the-badge)](https://hyva.io/)
-![License](https://img.shields.io/github/license/Siteation/magento2-storeusps?color=%23234&style=for-the-badge)
+![License](https://img.shields.io/github/license/Siteation/magento2-storeinfo-usps?color=%23234&style=for-the-badge)
 
 <!-- INTRO -->
 
@@ -12,7 +12,7 @@
 Install the package via;
 
 ```bash
-composer require siteation/magento2-storeusps
+composer require siteation/magento2-storeinfo-usps
 bin/magento setup:upgrade
 ```
 

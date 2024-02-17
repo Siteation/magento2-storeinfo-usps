@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+>
+    <body>
+        <referenceContainer name="product.info.main">
+            <block
+                name="storeinfo.usps.product"
+                template="Siteation_StoreInfoUsps::luma/product/usps.phtml"
+            >
+                <arguments>
+                    <argument name="viewModelStoreInfo"
+                        xsi:type="object">Siteation\StoreInfoUsps\ViewModel\StoreInfoUsps</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

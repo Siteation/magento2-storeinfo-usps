@@ -1,0 +1,42 @@
+<?php declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\Escaper;
+use Siteation\StoreInfoUsps\ViewModel\StoreInfoUsps;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+
+/** @var StoreInfoUsps $storeUsps */
+$storeUsps = $block->getData('viewModelStoreInfo');
+
+$usps = $storeUsps->getFooterUsps();
+
+if (count($usps) === 0) {
+    return '';
+}
+
+?>
+
+<section class="usps-wrapper" aria-label="<?= $escaper->escapeHtml(__('Our Unique Selling Points')) ?>">
+    <ul class="usps -style-row">
+        <?php foreach ($usps as $usp): ?>
+            <li>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M20 6 9 17l-5-5"/>
+                </svg>
+                <?= $escaper->escapeHtml($usp, ['a', 'strong', 'em', 'br']); ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</section>

@@ -1,24 +1,69 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+<config
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd"
+>
     <system>
-        <section id="general">
-            <group id="store_usps" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Store Usps</label>
-                <field id="usp_1" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Usps 1</label>
+        <tab id="siteation" sortOrder="999" translate="label">
+            <label>Siteation</label>
+        </tab>
+
+        <section id="siteation_storeinfo_usps" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10"
+            translate="label">
+            <label>Store Usps</label>
+            <tab>siteation</tab>
+            <resource>Magento_Backend::store</resource>
+
+            <group id="header" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Header</label>
+                <field id="usps" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1"
+                    showInStore="1" canRestore="1">
+                    <label>Usps</label>
+                    <frontend_model>Siteation\StoreInfoUsps\Block\Adminhtml\Form\Field\Usps</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
                 </field>
-                <field id="usp_2" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Usps 2</label>
+            </group>
+
+            <group id="footer" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Footer</label>
+                <field id="usps" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1"
+                    showInStore="1" canRestore="1">
+                    <label>Usps</label>
+                    <frontend_model>Siteation\StoreInfoUsps\Block\Adminhtml\Form\Field\Usps</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
                 </field>
-                <field id="usp_3" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Usps 3</label>
+            </group>
+
+            <group id="product" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1"
+                showInStore="1">
+                <label>Product Page</label>
+                <field id="usps" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1"
+                    showInStore="1" canRestore="1">
+                    <label>Usps</label>
+                    <frontend_model>Siteation\StoreInfoUsps\Block\Adminhtml\Form\Field\Usps</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
                 </field>
-                <field id="usp_4" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Usps 4</label>
+            </group>
+
+            <group id="custom_1" translate="label" sortOrder="40" showInDefault="1" showInWebsite="1"
+                showInStore="1">
+                <label>Custom 1</label>
+                <field id="usps" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1"
+                    showInStore="1" canRestore="1">
+                    <label>Usps</label>
+                    <frontend_model>Siteation\StoreInfoUsps\Block\Adminhtml\Form\Field\Usps</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
                 </field>
-                <field id="usp_5" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Usps 5</label>
+            </group>
+
+            <group id="custom_2" translate="label" sortOrder="41" showInDefault="1" showInWebsite="1"
+                showInStore="1">
+                <label>Custom 2</label>
+                <field id="usps" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1"
+                    showInStore="1" canRestore="1">
+                    <label>Usps</label>
+                    <frontend_model>Siteation\StoreInfoUsps\Block\Adminhtml\Form\Field\Usps</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
                 </field>
             </group>
         </section>
