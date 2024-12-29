@@ -15,7 +15,7 @@
             <resource>Magento_Backend::store</resource>
 
             <group id="header" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Header</label>
+                <label>Header Usps</label>
                 <field id="usps" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1"
                     showInStore="1" canRestore="1">
                     <label>Usps</label>
@@ -25,7 +25,7 @@
             </group>
 
             <group id="footer" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Footer</label>
+                <label>Footer Usps</label>
                 <field id="usps" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1"
                     showInStore="1" canRestore="1">
                     <label>Usps</label>
@@ -36,7 +36,7 @@
 
             <group id="product" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1"
                 showInStore="1">
-                <label>Product Page</label>
+                <label>Product Usps</label>
                 <field id="usps" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1"
                     showInStore="1" canRestore="1">
                     <label>Usps</label>
@@ -47,7 +47,7 @@
 
             <group id="custom_1" translate="label" sortOrder="40" showInDefault="1" showInWebsite="1"
                 showInStore="1">
-                <label>Custom 1</label>
+                <label>Custom Usps 1</label>
                 <field id="usps" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1"
                     showInStore="1" canRestore="1">
                     <label>Usps</label>
@@ -58,7 +58,7 @@
 
             <group id="custom_2" translate="label" sortOrder="41" showInDefault="1" showInWebsite="1"
                 showInStore="1">
-                <label>Custom 2</label>
+                <label>Custom Usps 2</label>
                 <field id="usps" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1"
                     showInStore="1" canRestore="1">
                     <label>Usps</label>

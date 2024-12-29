@@ -33,18 +33,18 @@ class IconOptions extends Select
     private function getSourceOptions(): array
     {
         return [
-            [ 'label' => 'Check', 'value' => 'check' ],
-            [ 'label' => 'Shipping', 'value' => 'shipping' ],
-            [ 'label' => 'Clock', 'value' => 'clock' ],
-            [ 'label' => 'Percent', 'value' => 'percent' ],
-            [ 'label' => 'Messages', 'value' => 'messages' ],
-            [ 'label' => 'Cart', 'value' => 'cart' ],
-            [ 'label' => 'Package', 'value' => 'package' ],
-            [ 'label' => 'Return', 'value' => 'return' ],
-            [ 'label' => 'Bell', 'value' => 'bell' ],
-            [ 'label' => 'Headset', 'value' => 'headset' ],
-            [ 'label' => 'Shield', 'value' => 'shield' ],
-            [ 'label' => 'Custom', 'value' => 'custom' ]
+            [ 'label' => __('Check'), 'value' => 'check' ],
+            [ 'label' => __('Shipping'), 'value' => 'shipping' ],
+            [ 'label' => __('Clock'), 'value' => 'clock' ],
+            [ 'label' => __('Percent'), 'value' => 'percent' ],
+            [ 'label' => __('Messages'), 'value' => 'messages' ],
+            [ 'label' => __('Cart'), 'value' => 'cart' ],
+            [ 'label' => __('Package'), 'value' => 'package' ],
+            [ 'label' => __('Return'), 'value' => 'return' ],
+            [ 'label' => __('Bell'), 'value' => 'bell' ],
+            [ 'label' => __('Headset'), 'value' => 'headset' ],
+            [ 'label' => __('Shield'), 'value' => 'shield' ],
+            [ 'label' => __('Custom'), 'value' => 'custom' ]
         ];
     }
 }
