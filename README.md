@@ -23,11 +23,18 @@ bin/magento setup:upgrade
 
 Go to `Stores > Configration > Siteation > Store Usps` and add you usp items
 
-| Admin        | Storefront   |
-| ------------ | ------------ |
-| ![preview-1] | ![preview-2] |
-|              | ![preview-3] |
+## Previews
 
-[preview-1]: ./assets/preview-admin.webp "Preview of the Magento2 admin Siteation StoreInfo Usps"
-[preview-2]: ./assets/preview.webp "Preview of the Siteation StoreInfo Usps"
-[preview-3]: ./assets/preview-mobile.webp "Preview of the Siteation StoreInfo Usps"
+**Admin**
+
+![preview-1]
+
+**Storefront**
+
+| Desktop      | Mobile       |
+| ------------ | ------------ |
+| ![preview-2] | ![preview-3] |
+
+[preview-1]: ./assets/preview-admin.jpg "Preview of the Magento2 admin Siteation StoreInfo Usps"
+[preview-2]: ./assets/preview.jpg "Preview of the Siteation StoreInfo Usps"
+[preview-3]: ./assets/preview-mobile.jpg "Preview of the Siteation StoreInfo Usps on Mobile"
