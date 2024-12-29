@@ -29,12 +29,22 @@ if (count($usps) === 0) {
 }
 ?>
 
-<section aria-label="<?= $escaper->escapeHtml(__('Our Unique Product Selling Points')) ?>">
+<section aria-label="<?= $escaper->escapeHtml(__('Our Unique Product Selling Points')) ?>" class="my-8 card">
     <ul class="usps space-y-2 font-semibold">
         <?php foreach ($usps as $usp): ?>
-            <li class="flex gap-2 items-center">
-                <?= $heroIcons->checkCircleHtml('text-green-500', 24, 24, ['aria-hidden' => 'true']) ?>
-                <?= $escaper->escapeHtml($usp, ['a', 'strong', 'em', 'br']); ?>
+            <li class="flex gap-2 items-center lg:text-lg lg:gap-4">
+                <svg
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    stroke="currentColor"
+                    class="text-primary"
+                    aria-hidden="true"
+                >
+                    <use href="<?= $block->getViewFileUrl('Siteation_StoreInfoUsps::images/usps.svg'); ?>#<?= $escaper->escapeHtml($usp['icon_name']); ?>" />
+                </svg>
+                <?= $escaper->escapeHtml($usp['content'], ['a', 'strong', 'em', 'br']); ?>
             </li>
         <?php endforeach; ?>
     </ul>

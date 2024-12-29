@@ -49,8 +49,18 @@ if (count($usps) === 0) {
                     opacity-0 lg:opacity-100 transition-opacity"
                 :class="{ 'opacity-0': currentItem !== <?= /** @noEscape */ $uspsStartIndex ?> }"
             >
-                <?= $heroIcons->checkHtml('text-green-500', 20, 20, ['aria-hidden' => 'true']) ?>
-                <?= $escaper->escapeHtml($usp, ['a', 'strong', 'em', 'br']); ?>
+                <svg
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    stroke="currentColor"
+                    class="text-primary"
+                    aria-hidden="true"
+                >
+                    <use href="<?= $block->getViewFileUrl('Siteation_StoreInfoUsps::images/usps.svg'); ?>#<?= $escaper->escapeHtml($usp['icon_name']); ?>" />
+                </svg>
+                <?= $escaper->escapeHtml($usp['content'], ['a', 'strong', 'em', 'br']); ?>
             </li>
         <?php
             $uspsStartIndex++;

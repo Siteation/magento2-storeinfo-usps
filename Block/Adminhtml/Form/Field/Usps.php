@@ -10,11 +10,20 @@ namespace Siteation\StoreInfoUsps\Block\Adminhtml\Form\Field;
 
 use Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray;
 use Magento\Framework\Data\Form\Element\AbstractElement;
+use Magento\Framework\DataObject;
+use Siteation\StoreInfoUsps\Block\Adminhtml\Form\Field\IconOptions;
 
 class Usps extends AbstractFieldArray
 {
+    private $iconRenderer;
+
     protected function _prepareToRender()
     {
+        $this->addColumn('icon_name', [
+            'label' => __('Icon'),
+            'renderer' => $this->getIconRenderer()
+        ]);
+
         $this->addColumn('content', [
             'label' => __('Content'),
             'class' => 'required-entry'
@@ -22,6 +31,30 @@ class Usps extends AbstractFieldArray
 
         $this->_addAfter = false;
         $this->_addButtonLabel = __('Add');
+    }
+
+    protected function _prepareArrayRow(DataObject $row): void
+    {
+        $options = [];
+
+        $icon = $row->getIcon();
+        if ($icon !== null) {
+            $options['option_' . $this->getIconRenderer()->calcOptionHash($icon)] = 'selected';
+        }
+
+        $row->setData('option_extra_attrs', $options);
+    }
+
+    private function getIconRenderer()
+    {
+        if (!$this->iconRenderer) {
+            $this->iconRenderer = $this->getLayout()->createBlock(
+                IconOptions::class,
+                '',
+                ['data' => ['is_render_to_js_template' => true]]
+            );
+        }
+        return $this->iconRenderer;
     }
 
     protected function _getElementHtml(AbstractElement $element): string
