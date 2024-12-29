@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [Unreleased]: https://github.com/Siteation/magento2-storeinfo/compare/1.0.0...main
 
+### Added
+- Option to drag the usp item position
+
 ### Fixed
 - Double landmark names
 
