@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [Unreleased]: https://github.com/Siteation/magento2-storeinfo/compare/1.0.0...main
 
+## 1.1.0 - 2024-12-29
 ### Added
 - Option to drag the usp item position
 
