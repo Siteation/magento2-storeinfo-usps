@@ -1,0 +1,57 @@
+<?php declare(strict_types=1);
+
+/**
+ * @author Siteation (https://siteation.dev/)
+ * @copyright Copyright 2023 Siteation (https://siteation.dev/)
+ * @license MIT
+ */
+
+use Hyva\Theme\ViewModel\HyvaCsp;
+
+/** @var HyvaCsp $hyvaCsp */
+
+?>
+
+<script>
+    function uspsCarousel() {
+        return {
+            uspsEvent: null,
+            currentItem: 2,
+            itemCount: 0,
+            speed: 3000,
+            isMobile: false,
+            init() {
+                this.itemCount = this.$root.children.length;
+                this.checkIsMobileResolution();
+            },
+            checkIsMobileResolution() {
+                this.isMobile = getComputedStyle(this.$root).display !== 'flex';
+
+                if (!this.isMobile) {
+                    this.stop();
+                }
+
+                if (this.isMobile && this.uspsEvent === null) {
+                    this.start();
+                }
+            },
+            cycle() {
+                this.currentItem = this.currentItem >= this.itemCount ? 1 : this.currentItem + 1;
+            },
+            start() {
+                this.uspsEvent = setInterval(() => this.cycle(), this.speed);
+            },
+            stop() {
+                clearInterval(this.uspsEvent);
+                this.uspsEvent = null;
+            },
+            activeUspsClass() {
+                const itemIndex = this.$el.dataset.index;
+                if (!itemIndex) return;
+                return this.currentItem === Number(itemIndex);
+            }
+        }
+    }
+    window.addEventListener('alpine:init', () => Alpine.data('uspsCarousel', uspsCarousel), { once: true })
+</script>
+<?php $hyvaCsp->registerInlineScript() ?>

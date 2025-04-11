@@ -36,9 +36,9 @@ if (count($usps) === 0) {
 >
     <ul
         class="container usps grid gap-x-8 gap-y-2 place-content-center lg:flex lg:flex-wrap lg:justify-start"
-        x-data="headerUspCarousel()"
-        @resize.window.debounce="checkIsMobileResolution()"
-        @visibilitychange.window.debounce="checkIsMobileResolution()"
+        x-data="uspsCarousel"
+        @resize.window.debounce="checkIsMobileResolution"
+        @visibilitychange.window.debounce="checkIsMobileResolution"
     >
         <?php
             $uspsStartIndex = 1;
@@ -46,8 +46,9 @@ if (count($usps) === 0) {
         ?>
             <li
                 class="inline-flex gap-2 justify-center items-center row-start-1 col-start-1 lg:shrink-1 lg:justify-start
-                    opacity-0 lg:opacity-100 transition-opacity"
-                :class="{ 'opacity-0': currentItem !== <?= /** @noEscape */ $uspsStartIndex ?> }"
+                    opacity-0 lg:opacity-100 aria-[current=true]:opacity-100 transition-opacity"
+                data-index="<?= /** @noEscape */ $uspsStartIndex ?>"
+                :aria-current="activeUspsClass"
             >
                 <svg
                     viewBox="0 0 24 24"
@@ -67,41 +68,4 @@ if (count($usps) === 0) {
             endforeach;
         ?>
     </ul>
-
-    <script>
-        function headerUspCarousel() {
-            return {
-                uspsEvent: null,
-                currentItem: 2,
-                itemCount: 0,
-                speed: 3000,
-                isMobile: false,
-                init() {
-                    this.itemCount = this.$root.children.length;
-                    this.checkIsMobileResolution();
-                },
-                checkIsMobileResolution() {
-                    this.isMobile = getComputedStyle(this.$root).display !== 'flex';
-
-                    if (!this.isMobile) {
-                        this.stop();
-                    }
-
-                    if (this.isMobile && this.uspsEvent === null) {
-                        this.start();
-                    }
-                },
-                cycle() {
-                    this.currentItem = this.currentItem >= this.itemCount ? 1 : this.currentItem + 1;
-                },
-                start() {
-                    this.uspsEvent = setInterval(() => this.cycle(), this.speed);
-                },
-                stop() {
-                    clearInterval(this.uspsEvent);
-                    this.uspsEvent = null;
-                },
-            }
-        }
-    </script>
 </section>

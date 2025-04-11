@@ -19,5 +19,8 @@
                 before="footer-content"
             />
         </referenceContainer>
+        <referenceContainer name="before.body.end">
+            <block name="storeinfo.usps.js" template="Siteation_StoreInfoUsps::hyva/page/js/usps-carousel.phtml"/>
+        </referenceContainer>
     </body>
 </page>
