@@ -21,13 +21,34 @@ class StoreInfoUsps implements ArgumentInterface
         $this->scopeConfig = $scopeConfig;
     }
 
+    // New helper method to process array data
+    private function processArrayData(array $arrayData): array
+    {
+        $processedArray = [];
+        foreach ($arrayData as $itemKey => $itemValue) {
+            if (is_object($itemValue)) {
+                $processedArray[$itemKey] = $this->objectToArray($itemValue); // Convert object elements
+            } elseif (is_array($itemValue)) {
+                $processedArray[$itemKey] = $this->processArrayData($itemValue); // Recurse for nested arrays
+            } else {
+                $processedArray[$itemKey] = $itemValue; // Scalar value
+            }
+        }
+        return $processedArray;
+    }
+
+    // Modified objectToArray method
     private function objectToArray(object $data): array
     {
         $result = [];
-        foreach ($data as $key => $value) {
-            $result[$key] = (is_array($value) || is_object($value))
-                ? $this->objectToArray($value)
-                : $value;
+        foreach ($data as $key => $value) { // $data is an object
+            if (is_object($value)) {
+                $result[$key] = $this->objectToArray($value); // Recursive call for object property
+            } elseif (is_array($value)) {
+                $result[$key] = $this->processArrayData($value); // Use helper for array property
+            } else {
+                $result[$key] = $value; // Scalar property
+            }
         }
         return $result;
     }
@@ -35,13 +56,37 @@ class StoreInfoUsps implements ArgumentInterface
     public function getStoreUsps(string $attribute): array
     {
         $path = sprintf('siteation_storeinfo_usps/%s/usps', $attribute);
-        $value = $this->scopeConfig->getValue($path, ScopeInterface::SCOPE_STORE);
+        $configValue = $this->scopeConfig->getValue($path, ScopeInterface::SCOPE_STORE);
 
-        if (is_string($value)) {
-            return (array) $this->objectToArray(json_decode($value));
+        $dataToProcess = null;
+
+        if (is_string($configValue)) {
+            if (trim($configValue) === '') { // Handle empty string config
+                return [];
+            }
+            $decodedJson = json_decode($configValue);
+
+            if ($decodedJson === null && json_last_error() !== JSON_ERROR_NONE) {
+                // Optionally log error: error_log('JSON decode error in StoreInfoUsps: ' . json_last_error_msg() . ' for attribute ' . $attribute . ' with value ' . $configValue);
+                return [];
+            }
+            $dataToProcess = $decodedJson;
+        } else {
+            $dataToProcess = $configValue;
         }
 
-        return (array) $value;
+        if ($dataToProcess === null) {
+            return [];
+        }
+
+        if (is_object($dataToProcess)) {
+            return $this->objectToArray($dataToProcess);
+        } elseif (is_array($dataToProcess)) {
+            return $this->processArrayData($dataToProcess);
+        } else {
+            // For scalar values, mimic original behavior of casting to array.
+            return (array)$dataToProcess;
+        }
     }
 
     public function getHeaderUsps(): array
