@@ -21,33 +21,15 @@ class StoreInfoUsps implements ArgumentInterface
         $this->scopeConfig = $scopeConfig;
     }
 
-    // New helper method to process array data
-    private function processArrayData(array $arrayData): array
-    {
-        $processedArray = [];
-        foreach ($arrayData as $itemKey => $itemValue) {
-            if (is_object($itemValue)) {
-                $processedArray[$itemKey] = $this->objectToArray($itemValue); // Convert object elements
-            } elseif (is_array($itemValue)) {
-                $processedArray[$itemKey] = $this->processArrayData($itemValue); // Recurse for nested arrays
-            } else {
-                $processedArray[$itemKey] = $itemValue; // Scalar value
-            }
-        }
-        return $processedArray;
-    }
-
-    // Modified objectToArray method
-    private function objectToArray(object $data): array
+    private function objectToArray($data): array
     {
         $result = [];
-        foreach ($data as $key => $value) { // $data is an object
-            if (is_object($value)) {
-                $result[$key] = $this->objectToArray($value); // Recursive call for object property
-            } elseif (is_array($value)) {
-                $result[$key] = $this->processArrayData($value); // Use helper for array property
+
+        foreach ($data as $key => $value) {
+            if (is_object($value) || is_array($value)) {
+                $result[$key] = $this->objectToArray($value);
             } else {
-                $result[$key] = $value; // Scalar property
+                $result[$key] = $value;
             }
         }
         return $result;
@@ -58,35 +40,24 @@ class StoreInfoUsps implements ArgumentInterface
         $path = sprintf('siteation_storeinfo_usps/%s/usps', $attribute);
         $configValue = $this->scopeConfig->getValue($path, ScopeInterface::SCOPE_STORE);
 
-        $dataToProcess = null;
-
-        if (is_string($configValue)) {
-            if (trim($configValue) === '') { // Handle empty string config
-                return [];
-            }
-            $decodedJson = json_decode($configValue);
-
-            if ($decodedJson === null && json_last_error() !== JSON_ERROR_NONE) {
-                // Optionally log error: error_log('JSON decode error in StoreInfoUsps: ' . json_last_error_msg() . ' for attribute ' . $attribute . ' with value ' . $configValue);
-                return [];
-            }
-            $dataToProcess = $decodedJson;
-        } else {
-            $dataToProcess = $configValue;
-        }
-
-        if ($dataToProcess === null) {
+        if (empty($configValue)) {
             return [];
         }
 
-        if (is_object($dataToProcess)) {
-            return $this->objectToArray($dataToProcess);
-        } elseif (is_array($dataToProcess)) {
-            return $this->processArrayData($dataToProcess);
-        } else {
-            // For scalar values, mimic original behavior of casting to array.
-            return (array)$dataToProcess;
+        $decodedJson = json_decode((string)$configValue);
+
+        if ($decodedJson === null && json_last_error() !== JSON_ERROR_NONE) {
+            if (is_array($configValue) || is_object($configValue)) {
+                return $this->objectToArray($configValue);
+            }
+            return [];
         }
+
+        if ($decodedJson === null) {
+            return [];
+        }
+
+        return $this->objectToArray($decodedJson);
     }
 
     public function getHeaderUsps(): array
@@ -94,7 +65,7 @@ class StoreInfoUsps implements ArgumentInterface
         return $this->getStoreUsps('header');
     }
 
-    public function getFooterUsps()
+    public function getFooterUsps(): array
     {
         return $this->getStoreUsps('footer');
     }
