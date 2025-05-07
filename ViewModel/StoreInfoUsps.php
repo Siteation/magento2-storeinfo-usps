@@ -15,6 +15,7 @@ use Magento\Store\Model\ScopeInterface;
 class StoreInfoUsps implements ArgumentInterface
 {
     protected $scopeConfig;
+    private array $uspsCache = []; // Add cache property
 
     public function __construct(ScopeConfigInterface $scopeConfig)
     {
@@ -34,14 +35,22 @@ class StoreInfoUsps implements ArgumentInterface
 
     public function getStoreUsps(string $attribute): array
     {
+        if (isset($this->uspsCache[$attribute])) {
+            return $this->uspsCache[$attribute];
+        }
+
         $path = sprintf('siteation_storeinfo_usps/%s/usps', $attribute);
         $value = $this->scopeConfig->getValue($path, ScopeInterface::SCOPE_STORE);
 
         if (is_string($value)) {
-            return (array) $this->objectToArray(json_decode($value));
+            $decodedJson = json_decode($value);
+            $result = $this->objectToArray($decodedJson);
+        } else {
+            $result = (array) $value;
         }
 
-        return (array) $value;
+        $this->uspsCache[$attribute] = $result; // Store in cache
+        return $result;
     }
 
     public function getHeaderUsps(): array
@@ -49,7 +58,7 @@ class StoreInfoUsps implements ArgumentInterface
         return $this->getStoreUsps('header');
     }
 
-    public function getFooterUsps(): array
+    public function getFooterUsps()
     {
         return $this->getStoreUsps('footer');
     }
