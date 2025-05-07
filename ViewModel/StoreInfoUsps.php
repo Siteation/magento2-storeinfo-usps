@@ -24,13 +24,10 @@ class StoreInfoUsps implements ArgumentInterface
     private function objectToArray($data): array
     {
         $result = [];
-
         foreach ($data as $key => $value) {
-            if (is_object($value) || is_array($value)) {
-                $result[$key] = $this->objectToArray($value);
-            } else {
-                $result[$key] = $value;
-            }
+            $result[$key] = (is_array($value) || is_object($value))
+                ? $this->objectToArray($value)
+                : $value;
         }
         return $result;
     }
@@ -38,26 +35,13 @@ class StoreInfoUsps implements ArgumentInterface
     public function getStoreUsps(string $attribute): array
     {
         $path = sprintf('siteation_storeinfo_usps/%s/usps', $attribute);
-        $configValue = $this->scopeConfig->getValue($path, ScopeInterface::SCOPE_STORE);
+        $value = $this->scopeConfig->getValue($path, ScopeInterface::SCOPE_STORE);
 
-        if (empty($configValue)) {
-            return [];
+        if (is_string($value)) {
+            return (array) $this->objectToArray(json_decode($value));
         }
 
-        $decodedJson = json_decode((string)$configValue);
-
-        if ($decodedJson === null && json_last_error() !== JSON_ERROR_NONE) {
-            if (is_array($configValue) || is_object($configValue)) {
-                return $this->objectToArray($configValue);
-            }
-            return [];
-        }
-
-        if ($decodedJson === null) {
-            return [];
-        }
-
-        return $this->objectToArray($decodedJson);
+        return (array) $value;
     }
 
     public function getHeaderUsps(): array
