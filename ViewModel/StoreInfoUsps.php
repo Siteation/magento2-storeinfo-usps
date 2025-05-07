@@ -21,7 +21,7 @@ class StoreInfoUsps implements ArgumentInterface
         $this->scopeConfig = $scopeConfig;
     }
 
-    private function objectToArray(object $data): array
+    private function objectToArray($data): array
     {
         $result = [];
         foreach ($data as $key => $value) {
@@ -49,7 +49,7 @@ class StoreInfoUsps implements ArgumentInterface
         return $this->getStoreUsps('header');
     }
 
-    public function getFooterUsps()
+    public function getFooterUsps(): array
     {
         return $this->getStoreUsps('footer');
     }
