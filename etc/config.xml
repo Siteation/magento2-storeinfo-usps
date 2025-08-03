@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd"
+>
+    <default>
+        <siteation_storeinfo_usps>
+            <header>
+                <usps>{"_1754235044872_872":{"icon_name":"shipping","content":"Super Fast Shipping"},"_1754235050383_383":{"icon_name":"shield","content":"Secure Ordering"}}</usps>
+            </header>
+        </siteation_storeinfo_usps>
+    </default>
+</config>
