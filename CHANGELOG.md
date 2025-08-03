@@ -9,11 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [Unreleased]: https://github.com/Siteation/magento2-storeinfo-usps/compare/1.0.0...main
 
+## [2.1.0] - 2025-08-03
+
 ### Added
 - More icon options
 
+### Changed
+- Backend sorter code with CSP support
+
 ### Fixed
+- Sorter handle position in Mage-OS theme
 - Icon size with many text
+
 ## [2.0.0] - 2024-12-29
 
 [2.0.0]: https://github.com/Siteation/magento2-storeinfo-usps/compare/1.1.0...2.0.0
