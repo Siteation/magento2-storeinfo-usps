@@ -1,0 +1,46 @@
+<?php declare(strict_types=1);
+
+/**
+ * @author Siteation (https://siteation.dev/)
+ * @copyright Copyright 2023 Siteation (https://siteation.dev/)
+ * @license MIT
+ */
+
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\Escaper;
+use Siteation\StoreInfoUsps\ViewModel\StoreInfoUsps;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+
+/** @var StoreInfoUsps $storeUsps */
+$storeUsps = $block->getData('viewModelStoreInfo');
+
+$usps = $storeUsps->getCartUsps();
+
+if (count($usps) === 0) {
+    return '';
+}
+
+?>
+
+<section class="usps-wrapper usps-spacer" aria-label="<?= $escaper->escapeHtml(__('Our Unique Product Selling Points')) ?>">
+    <ul class="usps">
+        <?php foreach ($usps as $usp): ?>
+            <li>
+                <svg
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    stroke="currentColor"
+                    class="text-primary"
+                    aria-hidden="true"
+                >
+                    <use href="<?= $block->getViewFileUrl('Siteation_StoreInfoUsps::images/usps.svg'); ?>#<?= $escaper->escapeHtml($usp['icon_name']); ?>" />
+                </svg>
+                <?= $escaper->escapeHtml($usp['content'], ['a', 'strong', 'em', 'br']); ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</section>

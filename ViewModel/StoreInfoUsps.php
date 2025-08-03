@@ -64,6 +64,11 @@ class StoreInfoUsps implements ArgumentInterface
         return $this->getStoreUsps('product');
     }
 
+    public function getCartUsps(): array
+    {
+        return $this->getStoreUsps('cart');
+    }
+
     public function getCustom1Usps(): array
     {
         return $this->getStoreUsps('custom_1');

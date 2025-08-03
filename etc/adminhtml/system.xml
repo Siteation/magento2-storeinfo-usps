@@ -45,7 +45,18 @@
                 </field>
             </group>
 
-            <group id="custom_1" translate="label" sortOrder="40" showInDefault="1" showInWebsite="1"
+            <group id="cart" translate="label" sortOrder="40" showInDefault="1" showInWebsite="1"
+                showInStore="1">
+                <label>Cart Usps</label>
+                <field id="usps" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1"
+                    showInStore="1" canRestore="1">
+                    <label>Usps</label>
+                    <frontend_model>Siteation\StoreInfoUsps\Block\Adminhtml\Form\Field\Usps</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
+
+            <group id="custom_1" translate="label" sortOrder="80" showInDefault="1" showInWebsite="1"
                 showInStore="1">
                 <label>Custom Usps 1</label>
                 <field id="usps" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1"
@@ -56,7 +67,7 @@
                 </field>
             </group>
 
-            <group id="custom_2" translate="label" sortOrder="41" showInDefault="1" showInWebsite="1"
+            <group id="custom_2" translate="label" sortOrder="81" showInDefault="1" showInWebsite="1"
                 showInStore="1">
                 <label>Custom Usps 2</label>
                 <field id="usps" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1"

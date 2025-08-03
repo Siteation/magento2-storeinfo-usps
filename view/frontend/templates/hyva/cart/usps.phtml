@@ -1,0 +1,47 @@
+<?php declare(strict_types=1);
+
+/**
+ * @author Siteation (https://siteation.dev/)
+ * @copyright Copyright 2023 Siteation (https://siteation.dev/)
+ * @license MIT
+ */
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\Escaper;
+use Siteation\StoreInfoUsps\ViewModel\StoreInfoUsps;
+
+/** @var ViewModelRegistry $viewModels */
+/** @var Template $block */
+/** @var Escaper $escaper */
+
+/** @var StoreInfoUsps $storeUsps */
+$storeUsps = $viewModels->require(StoreInfoUsps::class);
+
+$usps = $storeUsps->getCartUsps();
+
+if (count($usps) === 0) {
+    return '';
+}
+?>
+
+<section aria-label="<?= $escaper->escapeHtml(__('Our Unique Product Selling Points')) ?>" class="my-8 card">
+    <ul class="usps divide-y font-semibold">
+        <?php foreach ($usps as $usp): ?>
+            <li class="py-2 flex gap-2 items-center lg:text-lg lg:gap-4">
+                <svg
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    stroke="currentColor"
+                    class="text-primary shrink-0"
+                    aria-hidden="true"
+                >
+                    <use href="<?= $block->getViewFileUrl('Siteation_StoreInfoUsps::images/usps.svg'); ?>#<?= $escaper->escapeHtml($usp['icon_name']); ?>" />
+                </svg>
+                <?= $escaper->escapeHtml($usp['content'], ['a', 'strong', 'em', 'br']); ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</section>
