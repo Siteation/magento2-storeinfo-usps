@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [Unreleased]: https://github.com/Siteation/magento2-storeinfo-usps/compare/1.0.0...main
 
+## [2.1.1] - 2026-02-14
+
+### Added
+
+- Tailwind 4 support for Hyvä.
+
 ## [2.1.0] - 2025-08-03
 
 ### Added
