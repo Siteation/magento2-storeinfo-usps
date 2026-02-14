@@ -4,6 +4,4 @@
  * @license MIT
  */
 
-module.exports = {
-    content: ["../templates/hyva/**/*.phtml"],
-};
+@source "../templates/hyva/**/*.phtml";
